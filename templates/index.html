@@ -8,6 +8,18 @@
 
 <h1 class="mb-4">🍺 Beer List</h1>
 
+<form action="/add" method="POST" class="mb-4">
+
+    <input type="text" name="name" placeholder="Beer Name" class="form-control mb-2" required>
+
+    <input type="text" name="brewery" placeholder="Brewery" class="form-control mb-2" required>
+
+    <input type="number" step="0.1" name="abv" placeholder="ABV %" class="form-control mb-2" required>
+
+    <button type="submit" class="btn btn-primary">Add Beer</button>
+
+</form>
+
 <table class="table table-striped">
     <thead>
         <tr>

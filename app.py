@@ -1,13 +1,27 @@
-from flask import Flask, render_template, request, redirect, url_for
+@app.route('/add', methods=['POST'])
+def add():
+    name = request.form.get('name')
+    brewery = request.form.get('brewery')
+    abv = request.form.get('abv')
 
-app = Flask(__name__)
+    # Validation
+    if not name or len(name) > 100:
+        return "Invalid beer name"
 
-# In-memory storage
-beers = []
+    if not brewery or len(brewery) > 100:
+        return "Invalid brewery"
 
-@app.route('/')
-def index():
-    return render_template('index.html', beers=beers)
+    try:
+        abv = float(abv)
+        if abv < 0 or abv > 100:
+            return "Invalid ABV"
+    except:
+        return "ABV must be a number"
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    beers.append({
+        'name': name,
+        'brewery': brewery,
+        'abv': abv
+    })
+
+    return redirect(url_for('index'))
