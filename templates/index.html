@@ -8,6 +8,16 @@
 
 <h1 class="mb-4">🍺 Beer List</h1>
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-danger">
+      {% for msg in messages %}
+        <div>{{ msg }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
 <form action="/add" method="POST" class="mb-4">
 
     <input type="text" name="name" placeholder="Beer Name" class="form-control mb-2" required>
@@ -26,6 +36,7 @@
             <th>Name</th>
             <th>Brewery</th>
             <th>ABV (%)</th>
+            <th>Action</th> <!-- NEW COLUMN -->
         </tr>
     </thead>
     <tbody>
@@ -34,6 +45,12 @@
             <td>{{ beer.name }}</td>
             <td>{{ beer.brewery }}</td>
             <td>{{ beer.abv }}</td>
+            <td>
+                <!-- DELETE BUTTON -->
+                <a href="/delete/{{ loop.index0 }}" class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
